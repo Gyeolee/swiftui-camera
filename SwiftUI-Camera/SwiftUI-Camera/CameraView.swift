@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct CameraView: View {
-    @State private var isFlashOn: Bool = false
-    @State private var isSilentModeOn: Bool = false
-    
     var viewModel: CameraViewModel = .init()
     
     var body: some View {
@@ -24,16 +21,15 @@ struct CameraView: View {
             
             VStack {
                 HStack {
-                    Button(action: { isFlashOn.toggle() }) {
-                        Image(systemName: isFlashOn ? "speaker.fill" : "speaker")
-                            .foregroundColor(isFlashOn ? .yellow : .white)
+                    Button(action: viewModel.switchFlashOn) {
+                        Image(systemName: viewModel.isFlashOn ? "speaker.fill" : "speaker")
+                            .foregroundColor(viewModel.isFlashOn ? .yellow : .white)
                     }
                     .padding(.horizontal, 30)
                     
-                    // 플래시 온오프
-                    Button(action: { isSilentModeOn.toggle() }) {
-                        Image(systemName: isSilentModeOn ? "bolt.fill" : "bolt")
-                            .foregroundColor(isSilentModeOn ? .yellow : .white)
+                    Button(action: viewModel.switchSilentMode) {
+                        Image(systemName: viewModel.isSilentModeOn ? "bolt.fill" : "bolt")
+                            .foregroundColor(viewModel.isSilentModeOn ? .yellow : .white)
                     }
                     .padding(.horizontal, 30)
                 }
@@ -42,11 +38,11 @@ struct CameraView: View {
                 
                 Spacer()
                 
-                HStack{
+                HStack {
                     Button(action: {  }) {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 5)
-                            .frame(width: 75, height: 75)
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(lineWidth: 1)
+                            .frame(width: 40, height: 40)
                             .padding()
                     }
                     
@@ -54,8 +50,8 @@ struct CameraView: View {
                     
                     Button(action: {  }) {
                         Circle()
-                            .stroke(lineWidth: 5)
-                            .frame(width: 75, height: 75)
+                            .stroke(lineWidth: 4)
+                            .frame(width: 70, height: 70)
                             .padding()
                     }
                     
@@ -65,16 +61,14 @@ struct CameraView: View {
                         Image(systemName: "arrow.triangle.2.circlepath.camera")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 50, height: 50)
-                        
+                            .frame(width: 30, height: 30)
+                            .padding()
                     }
-                    .frame(width: 75, height: 75)
-                    .padding()
                 }
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
             }
-            .foregroundColor(.white)
         }
-//        .background(.black) // 임시
     }
 }
 

@@ -11,6 +11,9 @@ import AVFoundation
 @Observable class CameraViewModel {
     private let camera: Camera = .init()
     
+    var isFlashOn: Bool = false
+    var isSilentModeOn: Bool = false
+    
     var cameraSession: AVCaptureSession {
         camera.session
     }
@@ -33,5 +36,13 @@ import AVFoundation
     
     func startCamera() async {
         await camera.startSession()
+    }
+    
+    func switchFlashOn() {
+        isFlashOn.toggle()
+    }
+    
+    func switchSilentMode() {
+        isSilentModeOn.toggle()
     }
 }

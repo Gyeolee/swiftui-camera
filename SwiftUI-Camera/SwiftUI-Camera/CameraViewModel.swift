@@ -38,6 +38,10 @@ import AVFoundation
         await camera.startSession()
     }
     
+    func capturePhoto() {
+        camera.capture()
+    }
+    
     func switchFlashOn() {
         isFlashOn.toggle()
     }

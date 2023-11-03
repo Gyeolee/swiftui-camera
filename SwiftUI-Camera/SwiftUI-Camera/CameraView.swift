@@ -48,7 +48,7 @@ struct CameraView: View {
                     
                     Spacer()
                     
-                    Button(action: {  }) {
+                    Button(action: viewModel.capturePhoto) {
                         Circle()
                             .stroke(lineWidth: 4)
                             .frame(width: 70, height: 70)

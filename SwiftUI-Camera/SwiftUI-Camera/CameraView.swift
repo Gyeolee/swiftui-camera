@@ -57,7 +57,7 @@ struct CameraView: View {
                     
                     Spacer()
                     
-                    Button(action: {  }) {
+                    Button(action: viewModel.switchCameraPosition) {
                         Image(systemName: "arrow.triangle.2.circlepath.camera")
                             .resizable()
                             .scaledToFit()

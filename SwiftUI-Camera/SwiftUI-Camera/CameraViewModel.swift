@@ -42,6 +42,10 @@ import AVFoundation
         camera.capture()
     }
     
+    func switchCameraPosition() {
+        camera.switchPosition()
+    }
+    
     func switchFlashOn() {
         isFlashOn.toggle()
     }

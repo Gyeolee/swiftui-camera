@@ -11,6 +11,7 @@
 		627DE2E52AF491FC005CFDE3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2E42AF491FC005CFDE3 /* CameraView.swift */; };
 		627DE2E72AF491FE005CFDE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 627DE2E62AF491FE005CFDE3 /* Assets.xcassets */; };
 		627DE2EA2AF491FE005CFDE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 627DE2E92AF491FE005CFDE3 /* Preview Assets.xcassets */; };
+		627DE2F12AF4AC2B005CFDE3 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2F02AF4AC2B005CFDE3 /* CameraPreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		627DE2E42AF491FC005CFDE3 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		627DE2E62AF491FE005CFDE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		627DE2E92AF491FE005CFDE3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		627DE2F02AF4AC2B005CFDE3 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				627DE2E22AF491FC005CFDE3 /* SwiftUI_CameraApp.swift */,
 				627DE2E42AF491FC005CFDE3 /* CameraView.swift */,
+				627DE2F02AF4AC2B005CFDE3 /* CameraPreviewView.swift */,
 				627DE2E62AF491FE005CFDE3 /* Assets.xcassets */,
 				627DE2E82AF491FE005CFDE3 /* Preview Content */,
 			);
@@ -139,6 +142,7 @@
 			files = (
 				627DE2E52AF491FC005CFDE3 /* CameraView.swift in Sources */,
 				627DE2E32AF491FC005CFDE3 /* SwiftUI_CameraApp.swift in Sources */,
+				627DE2F12AF4AC2B005CFDE3 /* CameraPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +276,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI-Camera/Preview Content\"";
+				DEVELOPMENT_TEAM = LXWUX87WJP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -300,6 +305,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftUI-Camera/Preview Content\"";
+				DEVELOPMENT_TEAM = LXWUX87WJP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

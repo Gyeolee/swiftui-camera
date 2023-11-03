@@ -13,6 +13,8 @@ struct CameraView: View {
     
     var body: some View {
         ZStack {
+            CameraPreviewView()
+            
             VStack {
                 HStack {
                     Button(action: { isFlashOn.toggle() }) {
@@ -65,7 +67,7 @@ struct CameraView: View {
             }
             .foregroundColor(.white)
         }
-        .background(.black) // 임시
+//        .background(.black) // 임시
     }
 }
 

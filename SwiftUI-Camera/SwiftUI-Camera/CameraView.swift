@@ -11,9 +11,16 @@ struct CameraView: View {
     @State private var isFlashOn: Bool = false
     @State private var isSilentModeOn: Bool = false
     
+    var viewModel: CameraViewModel = .init()
+    
     var body: some View {
         ZStack {
-            CameraPreviewView()
+            CameraPreviewView(session: viewModel.cameraSession)
+                .task {
+                    if await viewModel.authorizationStatus() {
+                        await viewModel.startCamera()
+                    }
+                }
             
             VStack {
                 HStack {

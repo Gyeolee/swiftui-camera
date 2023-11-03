@@ -7,20 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		627DE2E32AF491FC005CFDE3 /* SwiftUI_CameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2E22AF491FC005CFDE3 /* SwiftUI_CameraApp.swift */; };
+		627DE2E32AF491FC005CFDE3 /* SwiftUICameraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2E22AF491FC005CFDE3 /* SwiftUICameraApp.swift */; };
 		627DE2E52AF491FC005CFDE3 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2E42AF491FC005CFDE3 /* CameraView.swift */; };
 		627DE2E72AF491FE005CFDE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 627DE2E62AF491FE005CFDE3 /* Assets.xcassets */; };
 		627DE2EA2AF491FE005CFDE3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 627DE2E92AF491FE005CFDE3 /* Preview Assets.xcassets */; };
 		627DE2F12AF4AC2B005CFDE3 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2F02AF4AC2B005CFDE3 /* CameraPreviewView.swift */; };
+		627DE2F52AF4C5A8005CFDE3 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2F42AF4C5A8005CFDE3 /* Camera.swift */; };
+		627DE2F72AF4C66C005CFDE3 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627DE2F62AF4C66C005CFDE3 /* CameraViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		627DE2DF2AF491FC005CFDE3 /* SwiftUI-Camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-Camera.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		627DE2E22AF491FC005CFDE3 /* SwiftUI_CameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_CameraApp.swift; sourceTree = "<group>"; };
+		627DE2E22AF491FC005CFDE3 /* SwiftUICameraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICameraApp.swift; sourceTree = "<group>"; };
 		627DE2E42AF491FC005CFDE3 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		627DE2E62AF491FE005CFDE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		627DE2E92AF491FE005CFDE3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		627DE2F02AF4AC2B005CFDE3 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		627DE2F42AF4C5A8005CFDE3 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		627DE2F62AF4C66C005CFDE3 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +57,11 @@
 		627DE2E12AF491FC005CFDE3 /* SwiftUI-Camera */ = {
 			isa = PBXGroup;
 			children = (
-				627DE2E22AF491FC005CFDE3 /* SwiftUI_CameraApp.swift */,
+				627DE2E22AF491FC005CFDE3 /* SwiftUICameraApp.swift */,
 				627DE2E42AF491FC005CFDE3 /* CameraView.swift */,
+				627DE2F62AF4C66C005CFDE3 /* CameraViewModel.swift */,
 				627DE2F02AF4AC2B005CFDE3 /* CameraPreviewView.swift */,
+				627DE2F42AF4C5A8005CFDE3 /* Camera.swift */,
 				627DE2E62AF491FE005CFDE3 /* Assets.xcassets */,
 				627DE2E82AF491FE005CFDE3 /* Preview Content */,
 			);
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				627DE2F52AF4C5A8005CFDE3 /* Camera.swift in Sources */,
 				627DE2E52AF491FC005CFDE3 /* CameraView.swift in Sources */,
-				627DE2E32AF491FC005CFDE3 /* SwiftUI_CameraApp.swift in Sources */,
+				627DE2E32AF491FC005CFDE3 /* SwiftUICameraApp.swift in Sources */,
+				627DE2F72AF4C66C005CFDE3 /* CameraViewModel.swift in Sources */,
 				627DE2F12AF4AC2B005CFDE3 /* CameraPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +287,7 @@
 				DEVELOPMENT_TEAM = LXWUX87WJP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한 요청";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,6 +317,7 @@
 				DEVELOPMENT_TEAM = LXWUX87WJP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한 요청";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -12,7 +12,11 @@ import AVFoundation
     private let camera: Camera = .init()
     
     var isFlashOn: Bool = false
-    var isSilentModeOn: Bool = false
+    var isSilentModeOn: Bool = false {
+        willSet {
+            camera.isSilentModeOn = newValue
+        }
+    }
     
     var cameraSession: AVCaptureSession {
         camera.session
@@ -35,7 +39,7 @@ import AVFoundation
     }
     
     func startCamera() async {
-        await camera.startSession()
+        await camera.start()
     }
     
     func capturePhoto() {
@@ -46,11 +50,11 @@ import AVFoundation
         camera.switchPosition()
     }
     
-    func switchFlashOn() {
-        isFlashOn.toggle()
-    }
-    
     func switchSilentMode() {
         isSilentModeOn.toggle()
+    }
+    
+    func switchFlashOn() {
+        isFlashOn.toggle()
     }
 }

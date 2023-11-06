@@ -7,9 +7,11 @@
 
 import AVFoundation
 import UIKit
+import SwiftUI
 
 final class Camera: NSObject {
     var session: AVCaptureSession = .init()
+    var isSilentModeOn: Bool = false
     
     private var input: AVCaptureDeviceInput!
     private var output: AVCapturePhotoOutput = .init()
@@ -36,7 +38,7 @@ final class Camera: NSObject {
     private lazy var frontPositionDevices: [AVCaptureDevice] = { devices.filter { $0.position == .front } }()
     private lazy var backPositionDevices: [AVCaptureDevice] = { devices.filter { $0.position == .back } }()
     
-    func startSession() async {
+    func start() async {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
             return
         }
@@ -85,12 +87,9 @@ final class Camera: NSObject {
                     session.removeInput($0)
                 }
             }
-            
             if session.canAddInput(input) {
                 session.addInput(input)
             }
-            
-            output.maxPhotoQualityPrioritization = .quality
             
             session.commitConfiguration()
         } catch {
@@ -107,6 +106,18 @@ final class Camera: NSObject {
 }
 
 extension Camera: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        if isSilentModeOn {
+            AudioServicesDisposeSystemSoundID(1108)
+        }
+    }
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        if isSilentModeOn {
+            AudioServicesDisposeSystemSoundID(1108)
+        }
+    }
+    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let imageData = photo.fileDataRepresentation() else {
             return

@@ -21,15 +21,15 @@ struct CameraView: View {
             
             VStack {
                 HStack {
-                    Button(action: viewModel.switchFlashOn) {
-                        Image(systemName: viewModel.isFlashOn ? "speaker.fill" : "speaker")
-                            .foregroundColor(viewModel.isFlashOn ? .yellow : .white)
+                    Button(action: viewModel.switchSilentMode) {
+                        Image(systemName: viewModel.isSilentModeOn ? "speaker" : "speaker.fill")
+                            .foregroundColor(viewModel.isSilentModeOn ? .white : .yellow)
                     }
                     .padding(.horizontal, 30)
                     
-                    Button(action: viewModel.switchSilentMode) {
-                        Image(systemName: viewModel.isSilentModeOn ? "bolt.fill" : "bolt")
-                            .foregroundColor(viewModel.isSilentModeOn ? .yellow : .white)
+                    Button(action: viewModel.switchFlashOn) {
+                        Image(systemName: viewModel.isFlashOn ? "bolt.fill" : "bolt")
+                            .foregroundColor(viewModel.isFlashOn ? .yellow : .white)
                     }
                     .padding(.horizontal, 30)
                 }

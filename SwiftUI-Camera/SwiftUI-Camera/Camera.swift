@@ -50,7 +50,6 @@ final class Camera: NSObject {
             
             if session.canAddOutput(output) {
                 session.addOutput(output)
-//                output.isHighResolutionCaptureEnabled = true
                 output.maxPhotoQualityPrioritization = .quality
             }
             
@@ -66,21 +65,37 @@ final class Camera: NSObject {
     }
     
     func switchPosition() {
-        let position: AVCaptureDevice.Position = input.device.position == .back ? .front : .back
-        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .audio, position: position) else {
+        let position: AVCaptureDevice.Position
+        switch input.device.position {
+        case .unspecified:  position = .back
+        case .back:         position = .front
+        case .front:        position = .back
+        @unknown default:   fatalError()
+        }
+        
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position) else {
             return
         }
         do {
             input = try AVCaptureDeviceInput(device: device)
+            session.beginConfiguration()
+            
+            if let inputs = session.inputs as? [AVCaptureDeviceInput] {
+                inputs.forEach {
+                    session.removeInput($0)
+                }
+            }
             
             if session.canAddInput(input) {
                 session.addInput(input)
             }
+            
+            output.maxPhotoQualityPrioritization = .quality
+            
+            session.commitConfiguration()
         } catch {
             print(error.localizedDescription)
         }
-        
-        print(session.inputs)
     }
     
     private func savePhoto(_ data: Data) {

@@ -33,17 +33,27 @@ struct CameraView: View {
                     }
                     .padding(.horizontal, 30)
                 }
-                .font(.system(size:25))
+                .font(.system(size: 30))
                 .padding()
                 
                 Spacer()
                 
                 HStack {
                     Button(action: {  }) {
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(lineWidth: 1)
-                            .frame(width: 40, height: 40)
-                            .padding()
+                        if let recentImage = viewModel.recentImage {
+                            Image(uiImage: recentImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .clipShape(RoundedRectangle(cornerRadius: 4))
+                                .aspectRatio(1, contentMode: .fit)
+                                .padding()
+                        } else {
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(lineWidth: 2)
+                                .frame(width: 50, height: 50)
+                                .padding()
+                        }
                     }
                     
                     Spacer()

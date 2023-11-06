@@ -6,24 +6,26 @@
 //
 
 import SwiftUI
+import Combine
 import AVFoundation
 
-@Observable class CameraViewModel {
+@Observable
+class CameraViewModel {
     private let camera: Camera = .init()
+    private var cancellables = Set<AnyCancellable>()
     
-    var isSilentModeOn: Bool = false {
-        willSet {
-            camera.isSilentModeOn = newValue
-        }
-    }
-    var isFlashOn: Bool = false {
-        willSet {
-            camera.flashMode = newValue ? .on : .off
-        }
-    }
+    var isSilentModeOn: Bool = false
+    var isFlashOn: Bool = false
+    var recentImage: UIImage?
     
     var cameraSession: AVCaptureSession {
         camera.session
+    }
+    
+    init() {
+        camera.$capturedImage
+            .sink { self.recentImage = $0 }
+            .store(in: &cancellables)
     }
     
     func authorizationStatus() async -> Bool {
@@ -56,9 +58,11 @@ import AVFoundation
     
     func switchSilentMode() {
         isSilentModeOn.toggle()
+        camera.isSilentModeOn = isSilentModeOn
     }
     
     func switchFlashOn() {
         isFlashOn.toggle()
+        camera.flashMode = isFlashOn ? .on : .off
     }
 }

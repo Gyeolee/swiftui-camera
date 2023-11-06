@@ -9,10 +9,11 @@ import AVFoundation
 import UIKit
 import SwiftUI
 
-final class Camera: NSObject {
+final class Camera: NSObject, ObservableObject {
     var session: AVCaptureSession = .init()
     var isSilentModeOn: Bool = false
     var flashMode: AVCaptureDevice.FlashMode = .off
+    @Published var capturedImage: UIImage?
     
     private var input: AVCaptureDeviceInput!
     private var output: AVCapturePhotoOutput = .init()
@@ -29,15 +30,16 @@ final class Camera: NSObject {
         .builtInLiDARDepthCamera,
         .continuityCamera
     ]
-    private lazy var devices: [AVCaptureDevice] = {
+    
+    private var devices: [AVCaptureDevice] {
         AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: .video, position: .unspecified).devices
-    }()
-    private lazy var frontPositionDevices: [AVCaptureDevice] = {
+    }
+    private var frontPositionDevices: [AVCaptureDevice] {
         devices.filter { $0.position == .front }
-    }()
-    private lazy var backPositionDevices: [AVCaptureDevice] = {
+    }
+    private var backPositionDevices: [AVCaptureDevice] {
         devices.filter { $0.position == .back }
-    }()
+    }
     
     func start() async {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
@@ -126,5 +128,6 @@ extension Camera: AVCapturePhotoCaptureDelegate {
             return
         }
         savePhoto(imageData)
+        capturedImage = UIImage(data: imageData)
     }
 }

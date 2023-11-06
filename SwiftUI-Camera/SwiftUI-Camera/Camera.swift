@@ -18,6 +18,7 @@ final class Camera: NSObject, ObservableObject {
     private var input: AVCaptureDeviceInput!
     private var output: AVCapturePhotoOutput = .init()
     
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     private let deviceTypes: [AVCaptureDevice.DeviceType] = [
         .external,
         .microphone,
@@ -112,12 +113,16 @@ final class Camera: NSObject, ObservableObject {
 
 extension Camera: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        feedbackGenerator.impactOccurred()
+        
         if isSilentModeOn {
             AudioServicesDisposeSystemSoundID(1108)
         }
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        print("didCapturePhotoFor")
+        
         if isSilentModeOn {
             AudioServicesDisposeSystemSoundID(1108)
         }

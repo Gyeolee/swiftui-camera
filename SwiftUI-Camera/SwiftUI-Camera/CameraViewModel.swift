@@ -12,6 +12,7 @@ import AVFoundation
 class CameraViewModel: ObservableObject {
     @Published private(set) var isSilentModeOn: Bool = false
     @Published private(set) var isFlashOn: Bool = false
+    @Published private(set) var blinkingEffectValue: CGFloat = 1
     @Published private(set) var recentImage: UIImage?
     
     var cameraSession: AVCaptureSession {
@@ -29,6 +30,11 @@ class CameraViewModel: ObservableObject {
         camera.$flashMode
             .map { $0 == .on }
             .assign(to: \.isFlashOn, on: self)
+            .store(in: &cancellables)
+        
+        camera.$isCapturing
+            .map { $0 ? 0 : 1 }
+            .assign(to: \.blinkingEffectValue, on: self)
             .store(in: &cancellables)
         
         camera.$capturedImage

@@ -13,6 +13,7 @@ struct CameraView: View {
     var body: some View {
         ZStack {
             CameraPreviewView(session: viewModel.cameraSession)
+                .opacity(viewModel.blinkingEffectValue)
                 .task {
                     if await viewModel.authorizationStatus() {
                         await viewModel.startCamera()

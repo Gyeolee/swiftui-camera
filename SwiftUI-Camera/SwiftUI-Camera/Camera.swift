@@ -12,6 +12,7 @@ import SwiftUI
 final class Camera: NSObject, ObservableObject {
     @Published private(set) var isSilentModeOn: Bool = false
     @Published private(set) var flashMode: AVCaptureDevice.FlashMode = .off
+    @Published private(set) var isCapturing: Bool = false
     @Published private(set) var capturedImage: UIImage?
     
     var session: AVCaptureSession = .init()
@@ -125,6 +126,10 @@ extension Camera: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
         feedbackGenerator.impactOccurred()
         
+        withAnimation {
+            isCapturing = true
+        }
+        
         if isSilentModeOn {
             AudioServicesDisposeSystemSoundID(1108)
         }
@@ -137,6 +142,10 @@ extension Camera: AVCapturePhotoCaptureDelegate {
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        withAnimation {
+            isCapturing = false
+        }
+        
         guard let imageData = photo.fileDataRepresentation() else {
             return
         }

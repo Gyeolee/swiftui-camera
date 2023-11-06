@@ -10,13 +10,11 @@ import UIKit
 import SwiftUI
 
 final class Camera: NSObject, ObservableObject {
-    var session: AVCaptureSession = .init()
-    var isSilentModeOn: Bool = false
-    var flashMode: AVCaptureDevice.FlashMode = .off
-    @Published var capturedImage: UIImage?
+    @Published private(set) var isSilentModeOn: Bool = false
+    @Published private(set) var flashMode: AVCaptureDevice.FlashMode = .off
+    @Published private(set) var capturedImage: UIImage?
     
-    private var input: AVCaptureDeviceInput!
-    private var output: AVCapturePhotoOutput = .init()
+    var session: AVCaptureSession = .init()
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     private let deviceTypes: [AVCaptureDevice.DeviceType] = [
@@ -31,6 +29,8 @@ final class Camera: NSObject, ObservableObject {
         .builtInLiDARDepthCamera,
         .continuityCamera
     ]
+    private var input: AVCaptureDeviceInput!
+    private let output: AVCapturePhotoOutput = .init()
     
     private var devices: [AVCaptureDevice] {
         AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: .video, position: .unspecified).devices
@@ -103,6 +103,14 @@ final class Camera: NSObject, ObservableObject {
         }
     }
     
+    func switchSilentMode() {
+        isSilentModeOn.toggle()
+    }
+    
+    func switchFlashMode() {
+        flashMode = flashMode == .off ? .on : .off
+    }
+    
     private func savePhoto(_ data: Data) {
         guard let image = UIImage(data: data) else {
             return
@@ -110,6 +118,8 @@ final class Camera: NSObject, ObservableObject {
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
+
+// MARK: - AVCapturePhotoCaptureDelegate
 
 extension Camera: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
@@ -121,8 +131,6 @@ extension Camera: AVCapturePhotoCaptureDelegate {
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
-        print("didCapturePhotoFor")
-        
         if isSilentModeOn {
             AudioServicesDisposeSystemSoundID(1108)
         }

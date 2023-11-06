@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CameraView: View {
-    var viewModel: CameraViewModel = .init()
+    @StateObject var viewModel: CameraViewModel = .init()
     
     var body: some View {
         ZStack {

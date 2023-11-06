@@ -63,6 +63,7 @@ struct CameraView: View {
                         Circle()
                             .stroke(lineWidth: 4)
                             .frame(width: 70, height: 70)
+                            .overlay(Circle().frame(width: 60, height: 60))
                             .padding()
                     }
                     

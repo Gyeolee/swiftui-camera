@@ -12,6 +12,7 @@ import SwiftUI
 final class Camera: NSObject {
     var session: AVCaptureSession = .init()
     var isSilentModeOn: Bool = false
+    var flashMode: AVCaptureDevice.FlashMode = .off
     
     private var input: AVCaptureDeviceInput!
     private var output: AVCapturePhotoOutput = .init()
@@ -29,14 +30,14 @@ final class Camera: NSObject {
         .continuityCamera
     ]
     private lazy var devices: [AVCaptureDevice] = {
-        AVCaptureDevice.DiscoverySession(
-            deviceTypes: deviceTypes,
-            mediaType: .video,
-            position: .unspecified
-        ).devices
+        AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: .video, position: .unspecified).devices
     }()
-    private lazy var frontPositionDevices: [AVCaptureDevice] = { devices.filter { $0.position == .front } }()
-    private lazy var backPositionDevices: [AVCaptureDevice] = { devices.filter { $0.position == .back } }()
+    private lazy var frontPositionDevices: [AVCaptureDevice] = {
+        devices.filter { $0.position == .front }
+    }()
+    private lazy var backPositionDevices: [AVCaptureDevice] = {
+        devices.filter { $0.position == .back }
+    }()
     
     func start() async {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
@@ -63,6 +64,8 @@ final class Camera: NSObject {
     
     func capture() {
         let photoSettings = AVCapturePhotoSettings()
+        photoSettings.flashMode = flashMode
+        
         output.capturePhoto(with: photoSettings, delegate: self)
     }
     

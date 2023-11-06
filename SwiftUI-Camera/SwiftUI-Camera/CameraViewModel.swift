@@ -11,10 +11,14 @@ import AVFoundation
 @Observable class CameraViewModel {
     private let camera: Camera = .init()
     
-    var isFlashOn: Bool = false
     var isSilentModeOn: Bool = false {
         willSet {
             camera.isSilentModeOn = newValue
+        }
+    }
+    var isFlashOn: Bool = false {
+        willSet {
+            camera.flashMode = newValue ? .on : .off
         }
     }
     

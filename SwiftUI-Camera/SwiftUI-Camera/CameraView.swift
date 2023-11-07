@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct CameraView: View {
-    @StateObject var viewModel: CameraViewModel = .init()
+    @StateObject private var viewModel: CameraViewModel = .init()
+    @State private var selectedItems: [PhotosPickerItem] = []
     
     var body: some View {
         ZStack {
@@ -40,7 +42,7 @@ struct CameraView: View {
                 Spacer()
                 
                 HStack {
-                    Button(action: {  }) {
+                    PhotosPicker(selection: $selectedItems, matching: .images, photoLibrary: .shared()) {
                         if let recentImage = viewModel.recentImage {
                             Image(uiImage: recentImage)
                                 .resizable()

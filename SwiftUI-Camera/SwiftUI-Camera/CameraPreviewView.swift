@@ -17,7 +17,6 @@ struct CameraPreviewView: UIViewRepresentable {
         view.previewLayer.videoGravity = .resizeAspectFill
         view.previewLayer.cornerRadius = 0
         view.previewLayer.session = session
-//        view.previewLayer.connection?.videoOrientation = .portrait
         view.previewLayer.connection?.videoRotationAngle = .infinity
         return view
     }
